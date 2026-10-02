@@ -19,17 +19,20 @@ if(MSVC)
     target_compile_options(vulkanapp PRIVATE /std:c++latest)
 endif()
 
-# Add the headers directory and GLM include directory
-target_include_directories(VulkanRenderer PRIVATE
-    ${CMAKE_SOURCE_DIR}/headers
-    ${CMAKE_SOURCE_DIR}/headers/game
-    ${CMAKE_SOURCE_DIR}/headers/engine
+target_link_libraries(VulkanRenderer PRIVATE
 
     Vulkan::Vulkan
     Vulkan::volk
     Vulkan::shaderc_combined
     SDL3::SDL3
     glm::glm
+)
+
+# Add the headers directory and GLM include directory
+target_include_directories(VulkanRenderer PRIVATE
+    ${CMAKE_SOURCE_DIR}/headers
+    ${CMAKE_SOURCE_DIR}/headers/game
+    ${CMAKE_SOURCE_DIR}/headers/engine
 
     /usr/include  # GLM is installed here on Ubuntu
 )
