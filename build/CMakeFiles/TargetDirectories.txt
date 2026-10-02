@@ -1,0 +1,3 @@
+/home/exeboss/MinaFiler/Programmering/GitProjekt/VulkanRenderer/build/CMakeFiles/VulkanRenderer.dir
+/home/exeboss/MinaFiler/Programmering/GitProjekt/VulkanRenderer/build/CMakeFiles/edit_cache.dir
+/home/exeboss/MinaFiler/Programmering/GitProjekt/VulkanRenderer/build/CMakeFiles/rebuild_cache.dir
