@@ -3,7 +3,13 @@ project(VulkanRenderer)
 
 find_package(SDL3 REQUIRED)
 find_package(Vulkan REQUIRED COMPONENTS volk shaderc_combined)
-find_package(glm REQUIRED)
+if(WIN32)
+    find_path(GLM_INCLUDE_DIR glm/glm.hpp HINTS $ENV{VULKAN_SDK}/Include)
+    set(GLM_LIBS "")              # header-only and nothing to link
+else()
+    find_package(glm REQUIRED)
+    set(GLM_LIBS glm::glm)
+endif()
 
 # Collect all source files
 file(GLOB ENGINE "src/engine/*.cpp")
@@ -16,7 +22,7 @@ set(ALL_SOURCES ${SOURCE} ${ENGINE} ${GAME})
 add_executable(VulkanRenderer ${ALL_SOURCES})
 
 if(MSVC)
-    target_compile_options(vulkanapp PRIVATE /std:c++latest)
+    target_compile_options(VulkanRenderer PRIVATE /std:c++latest)
 endif()
 
 target_link_libraries(VulkanRenderer PRIVATE
@@ -25,7 +31,7 @@ target_link_libraries(VulkanRenderer PRIVATE
     Vulkan::volk
     Vulkan::shaderc_combined
     SDL3::SDL3
-    glm::glm
+    ${GLM_LIBS}
 )
 
 # Add the headers directory and GLM include directory
@@ -34,5 +40,7 @@ target_include_directories(VulkanRenderer PRIVATE
     ${CMAKE_SOURCE_DIR}/headers/game
     ${CMAKE_SOURCE_DIR}/headers/engine
 
-    /usr/include  # GLM is installed here on Ubuntu
+    if(GLM_INCLUDE_DIR)
+        ${GLM_INCLUDE_DIR}
+    endif()
 )

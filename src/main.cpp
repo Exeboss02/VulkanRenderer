@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <SDL3/SDL_main.h>
 #include "engine.h"
 
 int main(int argc, char*argv[])

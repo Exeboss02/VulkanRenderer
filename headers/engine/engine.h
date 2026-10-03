@@ -1,3 +1,4 @@
+#pragma once
 #include <volk/volk.h>
 #include <vector>
 #include "window.h"
